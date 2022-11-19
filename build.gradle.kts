@@ -24,6 +24,8 @@ dependencies {
     implementation("org.springframework.kafka:spring-kafka-test:2.9.2")
     implementation("io.projectreactor.kafka:reactor-kafka:1.3.14")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("io.projectreactor:reactor-test")
+
 }
 
 tasks.withType<KotlinCompile> {

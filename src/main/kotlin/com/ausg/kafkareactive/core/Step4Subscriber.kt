@@ -13,7 +13,7 @@ class Step4Subscriber(private val runner: Function<ReceiverRecord<String, String
         request(3)
     }
 
-    override fun hookOnNext(record: ReceiverRecord<String, String>) {
+    public override fun hookOnNext(record: ReceiverRecord<String, String>) {
         Mono.just(record)
             .flatMap(runner)
             .subscribe { r: Boolean? ->

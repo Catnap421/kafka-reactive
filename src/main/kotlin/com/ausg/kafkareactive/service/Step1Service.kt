@@ -17,7 +17,7 @@ class Step1Service(kafkaManager: KafkaManager, repository: SomeRepository) :
         this.repository = repository
     }
 
-    override fun consumer(consumerFlux: Flux<ReceiverRecord<String, String>>): Flux<Boolean> {
+    public override fun consumer(consumerFlux: Flux<ReceiverRecord<String, String>>): Flux<Boolean> {
         return consumerFlux.map(this::commitAndConvertToInteger)
             .flatMap(repository::saveItem)
             .flatMap(repository::getReceivers)

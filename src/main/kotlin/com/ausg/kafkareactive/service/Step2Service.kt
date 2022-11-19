@@ -21,7 +21,7 @@ class Step2Service(kafkaManager: KafkaManager, repository: SomeRepository) :
         this.repository = repository
     }
 
-    override fun consumer(consumerFlux: Flux<ReceiverRecord<String, String>>): Flux<Boolean> {
+    public override fun consumer(consumerFlux: Flux<ReceiverRecord<String, String>>): Flux<Boolean> {
         return consumerFlux.map(this::commitAndConvertToInteger)
             .groupBy(Function.identity())
             .flatMap(this::sampling)
@@ -31,7 +31,7 @@ class Step2Service(kafkaManager: KafkaManager, repository: SomeRepository) :
             .flatMap(repository::saveResult)
     }
 
-    protected fun sampling(groupedFlux: GroupedFlux<Int, Int>): Flux<Int> {
+    fun sampling(groupedFlux: GroupedFlux<Int, Int>): Flux<Int> {
         return groupedFlux.sampleFirst(Duration.ofSeconds(5))
     }
 }

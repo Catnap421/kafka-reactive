@@ -10,7 +10,7 @@ import reactor.kafka.receiver.ReceiverRecord
 @Service
 class Step0Service(kafkaManager: KafkaManager) :
     OperatorDemoService<Boolean>("step-0", kafkaManager), RecordProcessor, HundredGenerator {
-    protected override fun consumer(consumerFlux: Flux<ReceiverRecord<String, String>>): Flux<Boolean> {
+    public override fun consumer(consumerFlux: Flux<ReceiverRecord<String, String>>): Flux<Boolean> {
         return consumerFlux.map(this::commit)
     }
 }

@@ -43,7 +43,7 @@ class Step3Service(kafkaManager: KafkaManager, repository: SomeRepository) :
         return super.stop()
     }
 
-    override fun consumer(consumerFlux: Flux<ReceiverRecord<String, String>>): Flux<SenderResult<String>> {
+    public override fun consumer(consumerFlux: Flux<ReceiverRecord<String, String>>): Flux<SenderResult<String>> {
         return consumerFlux.map(this::commitAndConvertToInteger)
             .groupBy(Function.identity())
             .flatMap(this::sampling)
